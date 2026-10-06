@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
-    "test": "vitest run"
+    "test": "vitest run",
+    "bundle:mac": "bash scripts/bundle-mac.sh"
   },
   "dependencies": {
     "lamejs": "^1.2.1",
