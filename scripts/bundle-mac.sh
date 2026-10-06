@@ -5,7 +5,7 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 npm run build
 
-APP="$ROOT/release/Onus Audio.app"
+APP="$ROOT/release/ONUS-Tools.app"
 rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources/www"
 
@@ -26,9 +26,9 @@ cat > "$APP/Contents/Info.plist" <<'EOF'
 <plist version="1.0">
 <dict>
   <key>CFBundleName</key>
-  <string>Onus Audio</string>
+  <string>ONUS-Tools</string>
   <key>CFBundleDisplayName</key>
-  <string>Onus Audio</string>
+  <string>ONUS-Tools</string>
   <key>CFBundleIdentifier</key>
   <string>io.github.audiohacking.onus-tools</string>
   <key>CFBundleVersion</key>
@@ -49,6 +49,6 @@ EOF
 
 codesign --force --sign - "$APP/Contents/MacOS/onus-serve"
 codesign --force --sign - "$APP"
-ditto -c -k --keepParent "$APP" "$ROOT/release/Onus-Audio-mac.zip"
+ditto -c -k --keepParent "$APP" "$ROOT/release/ONUS-Tools-mac.zip"
 echo "Built $APP"
-echo "Zip: $ROOT/release/Onus-Audio-mac.zip"
+echo "Zip: $ROOT/release/ONUS-Tools-mac.zip"

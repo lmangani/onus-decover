@@ -79,8 +79,8 @@ const logLines: string[] = [];
 app.innerHTML = `
   <header class="top">
     <div>
-      <h1>Audio Anonymizer</h1>
-      <p class="lede">Shift a track before you import it, or remove the tags from a file you already have.</p>
+      <h1>ONUS-Tools</h1>
+      <p class="lede">AI-Confusing Audio Tools for Audio Hackers</p>
     </div>
     <div class="tabs" role="tablist" aria-label="Tools">
       <button type="button" role="tab" id="tab-anonymize" aria-controls="panel-anonymize" aria-selected="true">Anonymize</button>

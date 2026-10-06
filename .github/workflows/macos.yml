@@ -1,12 +1,19 @@
-name: macOS app
+name: Release Mac app
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
+concurrency:
+  group: macos-release
+  cancel-in-progress: false
+
 jobs:
-  bundle:
+  release:
     runs-on: macos-latest
     steps:
       - name: Checkout
@@ -25,6 +32,24 @@ jobs:
       - name: Upload app
         uses: actions/upload-artifact@v4
         with:
-          name: Onus-Audio-mac
-          path: release/Onus-Audio-mac.zip
+          name: ONUS-Tools-mac
+          path: release/ONUS-Tools-mac.zip
           if-no-files-found: error
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          notes="$(mktemp)"
+          cat > "$notes" <<'EOF'
+          Double-clickable Mac app for Apple silicon and Intel.
+
+          Unzip `ONUS-Tools-mac.zip` and open `ONUS-Tools.app`. The first time, use the Finder shortcut menu and choose Open. Leave the Quit dialog up while the page is open. Audio stays on this computer.
+
+          Web version: https://audiohacking.github.io/onus-tools/
+          EOF
+          gh release delete macos --yes --cleanup-tag || true
+          gh release create macos release/ONUS-Tools-mac.zip \
+            --target "${{ github.sha }}" \
+            --title "ONUS-Tools for Mac" \
+            --latest \
+            --notes-file "$notes"

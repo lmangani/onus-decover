@@ -1,5 +1,5 @@
 #!/bin/bash
-# Double-clicked from Onus Audio.app. Serves the bundled page and opens it.
+# Double-clicked from ONUS-Tools.app. Serves the bundled page and opens it.
 set -u
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 SERVE="$ROOT/MacOS/onus-serve"
@@ -16,7 +16,7 @@ cleanup() {
 trap cleanup EXIT
 
 if [ ! -x "$SERVE" ] || [ ! -d "$WWW" ]; then
-  osascript -e 'display alert "Onus Audio is missing its local files."'
+  osascript -e 'display alert "ONUS-Tools is missing its local files."'
   exit 1
 fi
 
@@ -32,13 +32,13 @@ while [ "$PORT" -le 4190 ]; do
 done
 
 if [ -z "$PID" ]; then
-  osascript -e 'display alert "Onus Audio could not start its local server."'
+  osascript -e 'display alert "ONUS-Tools could not start its local server."'
   exit 1
 fi
 
 open "http://127.0.0.1:${PORT}/"
 osascript <<'EOF'
-display dialog "Onus Audio is open in your browser.
+display dialog "ONUS-Tools is open in your browser.
 
-Leave this dialog up while you use it. Quitting stops the local page." buttons {"Quit"} default button 1 with title "Onus Audio"
+Leave this dialog up while you use it. Quitting stops the local page." buttons {"Quit"} default button 1 with title "ONUS-Tools"
 EOF
